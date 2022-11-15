@@ -4,16 +4,13 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
 @Entity
 public class ViewFlight {
 
 	@Id
-	@GeneratedValue(generator = "flight_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "flight_seq", sequenceName = "flight_sequence", initialValue = 1, allocationSize = 1)
+	@GeneratedValue
 	private int id;
 	private String source;
 	private String destination;

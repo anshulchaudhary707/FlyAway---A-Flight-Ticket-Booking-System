@@ -10,7 +10,9 @@
 	<%
 	session = request.getSession(false);
 	session.removeAttribute("user");
-	System.out.println(session.getAttribute("user"));
+	session.removeAttribute("booked_ticket");
+	System.out.println("User Attribute"+session.getAttribute("user"));
+	System.out.println("Ticket 1 attribute"+session.getAttribute("user"));
 	session.invalidate();
 	System.out.println("User Logged Out");
 	request.getRequestDispatcher("index.jsp").include(request, response);

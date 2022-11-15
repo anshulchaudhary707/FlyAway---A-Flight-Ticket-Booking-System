@@ -4,39 +4,37 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "bookflight")
 public class BookFlight {
 	
 	@Id
-	@GeneratedValue(generator = "ticket_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "ticket_seq", sequenceName = "ticket_sequence", initialValue = 1, allocationSize = 1)
-	private int id;
+	@GeneratedValue
+	private int ticket_id;
 	private String source;
 	private String destination;
 	private String name;
 	private String email;
 	private String phone_no;
-	private String numberOfTickets;
+	private int numberOfTickets;
 	private int totalPrice;
 	private LocalDateTime dateTime;
 	private int flight_id;
 	private String passport;
+	private String airline_name;
 	
 	public BookFlight() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-	public BookFlight(int id, String source, String destination, String name, String email, String phone_no,
-			String numberOfTickets, int totalPrice, LocalDateTime dateTime, int flight_id, String passport) {
+	public BookFlight(String source, String destination, String name, String email, String phone_no,
+			int numberOfTickets, int totalPrice, LocalDateTime dateTime, int flight_id, String passport,
+			String airline_name) {
 		super();
-		this.id = id;
 		this.source = source;
 		this.destination = destination;
 		this.name = name;
@@ -47,15 +45,14 @@ public class BookFlight {
 		this.dateTime = dateTime;
 		this.flight_id = flight_id;
 		this.passport = passport;
+		this.airline_name = airline_name;
 	}
-
-
-
-	public int getId() {
-		return id;
+	
+	public int getTicket_id() {
+		return ticket_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setTicket_id(int ticket_id) {
+		this.ticket_id = ticket_id;
 	}
 	public String getSource() {
 		return source;
@@ -87,10 +84,10 @@ public class BookFlight {
 	public void setPhone_no(String phone_no) {
 		this.phone_no = phone_no;
 	}
-	public String getNumberOfTickets() {
+	public int getNumberOfTickets() {
 		return numberOfTickets;
 	}
-	public void setNumberOfTickets(String numberOfTickets) {
+	public void setNumberOfTickets(int numberOfTickets) {
 		this.numberOfTickets = numberOfTickets;
 	}
 	public int getTotalPrice() {
@@ -111,12 +108,25 @@ public class BookFlight {
 	public void setFlight_id(int flight_id) {
 		this.flight_id = flight_id;
 	}
-
 	public String getPassport() {
 		return passport;
 	}
-
 	public void setPassport(String passport) {
 		this.passport = passport;
 	}
+	public String getAirline_name() {
+		return airline_name;
+	}
+	public void setAirline_name(String airline_name) {
+		this.airline_name = airline_name;
+	}
+
+	@Override
+	public String toString() {
+		return "BookFlight [ticket_id=" + ticket_id + ", source=" + source + ", destination=" + destination + ", name="
+				+ name + ", email=" + email + ", phone_no=" + phone_no + ", numberOfTickets=" + numberOfTickets
+				+ ", totalPrice=" + totalPrice + ", dateTime=" + dateTime + ", flight_id=" + flight_id + ", passport="
+				+ passport + ", airline_name=" + airline_name + "]";
+	}
+	
 }

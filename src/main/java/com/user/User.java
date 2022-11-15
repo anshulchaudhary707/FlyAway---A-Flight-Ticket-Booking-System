@@ -66,4 +66,20 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public User(String email, String name, String phone_no, String password, float money, String address) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.phone_no = phone_no;
+		this.password = password;
+		this.money = money;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", name=" + name + ", phone_no=" + phone_no + ", password=" + password
+				+ ", money=" + money + ", address=" + address + "]";
+	}
 }

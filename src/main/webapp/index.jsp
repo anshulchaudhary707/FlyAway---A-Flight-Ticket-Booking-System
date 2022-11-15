@@ -22,6 +22,48 @@
 #myform table tr td input {
 	font-size: 20px;
 }
+.dropbtn {
+	background-color: #7B68EE;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	margin: auto;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #D3D3D3;
+}
 </style>
 </head>
 
@@ -38,46 +80,51 @@
 
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="view_scheduled.jsp">View All Flights</a></li>
-					<li class="nav-item"><a class="nav-link" href="user_signup_form.jsp">User Sign Up</a></li>
-					<li class="nav-item"><a class="nav-link" href="user_login_form.jsp">User Log In</a></li>
-					<li class="nav-item"><a class="nav-link" href="admin_login_form.jsp">Admin Log In</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="user_signup_form.jsp">New User? Sign Up </a></li>
 				</ul>
+			</div>
+			<div class="dropdown">
+				<button class="dropbtn">Log In</button>
+				<div class="dropdown-content">
+					<a href="user_login_form.jsp">User Log In</a> <a
+						href="admin_login_form.jsp">Admin Log In</a>
+				</div>
 			</div>
 		</div>
 	</nav>
 	<br>
 </div>
+<body>
+	<div class="container1">
+		<h2>Search A Flight</h2>
+		<form id="myform" action="view_searched.jsp">
+			<table>
+				<tr>
+					<td>Enter Source :</td>
+					<td><input type="text" name="from" placeholder="Enter Source"
+						required /></td>
+				</tr>
+				<tr>
+					<td>Enter Destination :</td>
+					<td><input type="text" name="to"
+						placeholder="Enter Destination" required /></td>
+				</tr>
+				<tr>
+					<td>Enter Date :</td>
+					<td><input type="text" name="date" placeholder="yyyy-mm-dd" /></td>
+				</tr>
 
-<div class="container1">
-	<h2>Search A Flight</h2>
-	<form id="myform" action="view_searched.jsp">
-		<table>
-			<tr>
-				<td>Enter Source :</td>
-				<td><input type="text" name="from" placeholder="Enter Source"
-					required /></td>
-			</tr>
-			<tr>
-				<td>Enter Destination :</td>
-				<td><input type="text" name="to"
-					placeholder="Enter Destination" required /></td>
-			</tr>
-			<tr>
-				<td>Enter Date :</td>
-				<td><input type="text" name="date" placeholder="yyyy-mm-dd" /></td>
-			</tr>
-
-			<tr>
-				<td>
-					<div class="container text-center">
-						<button type="submit">Search</button>
-						<button type="reset">Reset</button>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</form>
-</div>
+				<tr>
+					<td>
+						<div class="container text-center">
+							<button type="submit">Search</button>
+							<button type="reset">Reset</button>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

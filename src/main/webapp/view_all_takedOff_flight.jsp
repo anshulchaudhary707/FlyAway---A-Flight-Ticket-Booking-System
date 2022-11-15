@@ -26,6 +26,11 @@
 <%@include file="all_js_css.jsp"%>
 </head>
 <body>
+	<%
+	if (session.getAttribute("admin_name") == null) {
+		response.sendRedirect("index.jsp");
+	}
+	%>
 	<div class="container">
 		<nav class="navbar navbar-expand-md bg-light">
 			<div class="container">
@@ -54,7 +59,7 @@
 		<br>
 	</div>
 
-	<h2 class="text-uppercase">Taked Off FLights: </h2>
+	<h2 class="text-uppercase">Taked Off FLights:</h2>
 
 	<div class="row">
 		<div class="col-12">
@@ -82,12 +87,11 @@
 						<%=vf.getDestination()%>
 						at
 						<%=vf.getDateTime()%>. Price per ticket is
-						<%=vf.getPrice()%> 
+						<%=vf.getPrice()%>
 						and airline is
 						<%=vf.getAirline()%>.
 					</p>
-					<a href="DeleteFlightServlet?flight_id=<%=vf.getId()%>"
-						class="btn btn-primary">Delete</a>
+					<a href="DeleteFlightServlet?flight_id=<%= vf.getId() %>" class="btn btn-primary">Delete</a>
 				</div>
 			</div>
 

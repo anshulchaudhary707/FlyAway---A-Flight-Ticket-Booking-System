@@ -1,29 +1,39 @@
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ 
+	page import="org.hibernate.*"%>
+
+<%@ 
+	page import="org.hibernate.cfg.Configuration"%>
+
+<%@ 
+	page import="java.util.List"%>
+
+<%@ 
+	page import="org.hibernate.criterion.Restrictions"%>
+
+<%@
+	page import="javax.servlet.http.HttpSession"%>
+
+<%@
+	page import="com.flight.book.BookFlight"%>
+
+<%@
+	page import="com.user.User"%>
+
+<%@
+	page import="java.time.LocalDateTime"%>
+
+<!DOCTYPE html>
+<html>
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-<title>User</title>
+<meta charset="UTF-8">
+<title>Scheduled Flights</title>
 <%@include file="all_js_css.jsp"%>
 <link rel="stylesheet" href="/Demo/src/main/webapp/custom-style.css">
 
 <style>
-.container1 {
-	width: 40%;
-	border: 1px solid black;
-	margin: auto;
-	padding: 20px;
-	font-size: 20px;
-}
-
-#myform table tr td input {
-	font-size: 20px;
-}
-
 .dropbtn {
 	background-color: #7B68EE;
 	color: white;
@@ -86,16 +96,14 @@
 				</button>
 				<div class="collapse navbar-collapse" id="collapsibleNavbar">
 					<ul class="navbar-nav ml-auto">
-
+						<li class="nav-item"><a class="nav-link"
+							href="index_user.jsp">Home </a></li>
 					</ul>
 				</div>
 				<div class="dropdown">
 					<button class="dropbtn">Profile</button>
 					<div class="dropdown-content">
-						<a href="change_password.jsp">Change Password</a> <a
-							href="user_scheduled_flights.jsp">My Flights</a> <a
-							href="view_user_history.jsp">History Tickets</a> <a
-							href="view_money.jsp">Check Wallet</a> <a
+						<a href="user_scheduled_flights.jsp">My Flights</a> <a href="view_money.jsp">Check Wallet</a> <a
 							href="user_logout_form.jsp">Log Out</a>
 					</div>
 				</div>
@@ -103,36 +111,42 @@
 		</nav>
 		<br>
 	</div>
-	<div class="container1">
-		<h2>Search A Flight</h2>
-		<form id="myform" action="view_searched_flights_user.jsp"
-			method="post">
-			<table>
-				<tr>
-					<td>Enter Source :</td>
-					<td><input type="text" name="from" placeholder="Enter Source"
-						required /></td>
-				</tr>
-				<tr>
-					<td>Enter Destination :</td>
-					<td><input type="text" name="to"
-						placeholder="Enter Destination" required /></td>
-				</tr>
-				<tr>
-					<td>Enter Date :</td>
-					<td><input type="text" name="date" placeholder="yyyy-mm-dd" /></td>
-				</tr>
+	<%
+	User u1 = (User) session.getAttribute("user");
+	String email = u1.getEmail();
 
-				<tr>
-					<td>
-						<div class="container text-center">
-							<button type="submit">Search</button>
-							<button type="reset">Reset</button>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</form>
+	Session s = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+	Criteria c = s.createCriteria(BookFlight.class);
+	c.add(Restrictions.eq("email", email));
+	c.add(Restrictions.lt("dateTime", LocalDateTime.now()));
+	List<BookFlight> list = c.list();
+
+	int i = 0;
+
+	if (list.size() > 0) {
+		for (BookFlight bf : list) {
+			i++;
+	%>
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title"><%=i%></h5>
+			<p class="card-text">
+				From
+				<%=bf.getSource()%>
+				to
+				<%=bf.getDestination()%>
+				at
+				<%=bf.getDateTime()%>. Airline is
+				<%=bf.getAirline_name()%>. Ticket Holder:
+				<%=bf.getName()%>
+			</p>
+		</div>
 	</div>
+	<%
+	}
+	} else {
+	out.println("No Transactions yet !");
+	}
+	%>
 </body>
 </html>

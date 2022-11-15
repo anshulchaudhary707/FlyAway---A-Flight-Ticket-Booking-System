@@ -29,6 +29,11 @@ div {
 </style>
 </head>
 <body>
+	<%
+	if (session.getAttribute("admin_name") == null) {
+		response.sendRedirect("index.jsp");
+	}
+	%>
 	<div class="container">
 		<div class="title">Enter Flight Details</div>
 		<div class="content">

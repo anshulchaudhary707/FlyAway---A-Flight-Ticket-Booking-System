@@ -35,6 +35,11 @@
 <%@include file="all_js_css.jsp"%>
 </head>
 <body>
+	<%
+	if (session.getAttribute("admin_name") == null) {
+		response.sendRedirect("index.jsp");
+	}
+	%>
 	<nav class="navbar navbar-expand-md bg-light">
 		<div class="container">
 			<a class="navbar-brand">FlyAway</a>
@@ -89,7 +94,7 @@
 						<%=vf.getDestination()%>
 						at
 						<%=vf.getDateTime()%>. Price per ticket is
-						<%=vf.getPrice()%> 
+						<%=vf.getPrice()%>
 						and airline is
 						<%=vf.getAirline()%>.
 					</p>

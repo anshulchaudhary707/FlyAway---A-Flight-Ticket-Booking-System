@@ -9,6 +9,11 @@
 <link rel="stylesheet" href="/Demo/src/main/webapp/custom-style.css">
 </head>
 <body>
+	<%
+	if (session.getAttribute("admin_name") == null) {
+		response.sendRedirect("index.jsp");
+	}
+	%>
 	<nav class="navbar navbar-expand-md bg-light">
 		<div class="container">
 			<a class="navbar-brand">FlyAway</a>

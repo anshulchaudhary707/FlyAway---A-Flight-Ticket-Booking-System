@@ -17,34 +17,32 @@ import org.hibernate.SessionFactory;
 import com.helper.FactoryProvider;
 import com.user.User;
 
-@WebServlet("/LogInServlet")
-public class LogInServlet extends HttpServlet {
+@WebServlet("/LogInServlet1")
+public class LogInServlet1 extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res)  throws ServletException, IOException{
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		
+
 		SessionFactory sf = FactoryProvider.getFactory();
 		Session s = sf.openSession();
-		
-		User user = (User)s.get(User.class, email);
+
+		User user = (User) s.get(User.class, email);
 		System.out.println(password);
-		
-		if(user != null && password.equals(user.getPassword())) {
+
+		if (user != null && password.equals(user.getPassword())) {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", user);
-			User user1 = (User)session.getAttribute("user");
-			System.out.println("hii from login session: "+user1.getName());
-			RequestDispatcher rd = req.getRequestDispatcher("index_user.jsp");
-			rd.include(req, res);
-		}
-		else {
+			User user1 = (User) session.getAttribute("user");
+			System.out.println("hii from login session: " + user1.getName());
+			res.sendRedirect("book_searched_flights_user1.jsp");
+		} else {
 			PrintWriter out = res.getWriter();
 			res.setContentType("text/html");
 			out.println("Invalid Credentials");
-			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("user_login_form1.jsp");
 			rd.include(req, res);
 		}
 	}

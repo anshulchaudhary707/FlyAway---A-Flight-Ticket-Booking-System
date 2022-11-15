@@ -27,8 +27,8 @@
 
 <%@ 
 	page import="org.hibernate.criterion.Restrictions"%>
-<%@ 
-	page import="javax.servlet.RequestDispatcher"%>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -38,6 +38,11 @@
 <%@include file="all_js_css.jsp"%>
 </head>
 <body>
+	<%
+		if(session.getAttribute("user") == null){
+			response.sendRedirect("index.jsp");
+		}
+	%>
 	<div class="container">
 		<nav class="navbar navbar-expand-md bg-light">
 			<div class="container">
@@ -51,8 +56,16 @@
 
 				<div class="collapse navbar-collapse" id="collapsibleNavbar">
 					<ul class="navbar-nav ml-auto">
+
 						<li class="nav-item"><a class="nav-link"
-							href="index.jsp">Home</a></li>
+							href="index_user.jsp">Home</a></li>
+
+
+						<li class="nav-item"><a class="nav-link"
+							href="view_scheduled_flights_user.jsp">View All Flights</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="user_logout_form.jsp">Log Out</a></li>
 					</ul>
 				</div>
 			</div>
@@ -63,8 +76,6 @@
 	<div class="row">
 		<div class="col-12">
 			<%
-			
-			HttpSession ss = request.getSession(false);
 			
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -105,11 +116,14 @@
 						<%=vf.getDestination()%>
 						at
 						<%=vf.getDateTime()%>. Price per ticket is
-						<%=vf.getPrice()%> 
+						<%=vf.getPrice()%>
 						and airline is
 						<%=vf.getAirline()%>.
 					</p>
-					<a href="book_ticket_loggedOut.jsp?flight_id=<%= vf.getId() %>" class="btn btn-primary">Book Ticket</a>
+					<a
+						href="book_searched_flights_user.jsp?flight_id=<%= vf.getId() %>"
+						class="btn btn-primary">Book Ticket</a>
+					<!-- <a href="book_flight_help.jsp?flight_id=<%= vf.getId() %>" class="btn btn-primary">Book Ticket</a> -->
 				</div>
 			</div>
 
@@ -118,7 +132,7 @@
 				if(i == 0){
 					out.println("<h2>No Scheduled Flights From "+source+" To "+destination+", at: "+sdate+".</h2>");
 					%>
-			<a href="index.jsp" class="btn btn-primary">Search Another
+			<a href="index_user.jsp" class="btn btn-primary">Search Another
 				Flight.</a>
 			<%
 				}
@@ -150,11 +164,13 @@
 						<%=vf.getDestination()%>
 						at
 						<%=vf.getDateTime()%>. Price per ticket is
-						<%=vf.getPrice()%> 
+						<%=vf.getPrice()%>
 						and airline is
 						<%=vf.getAirline()%>.
 					</p>
-					<a href="#" class="btn btn-primary">Book Ticket</a>
+					<a
+						href="book_searched_flights_user.jsp?flight_id=<%= vf.getId() %>"
+						class="btn btn-primary">Book Ticket</a>
 					<!-- <a href="book_flight_help.jsp?flight_id=<%= vf.getId() %>" class="btn btn-primary">Book Ticket</a> -->
 				</div>
 			</div>
@@ -164,14 +180,14 @@
 			if (i == 0) {
 			out.println("<h2>No Scheduled Flights From !!!!" + source + " To " + destination + ", at: " + sdate + ".</h2>");
 			%>
-			<a href="index.jsp" class="btn btn-primary">Search Another
+			<a href="index_user.jsp" class="btn btn-primary">Search Another
 				Flight.</a>
 			<%
 			}
 			} else {
 			out.println("<h2>You cant book a flight for yesterday !!!!</h2>");
 			%>
-			<a href="index.jsp" class="btn btn-primary">Search Another
+			<a href="index_user.jsp" class="btn btn-primary">Search Another
 				Flight.</a>
 			<%
 			}
