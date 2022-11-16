@@ -126,5 +126,15 @@
 			</table>
 		</form>
 	</div>
+	<div style="text-align: center;">
+		<h1>Admin UserName : root</h1>
+		<br>
+		<h1>Admin Password : root</h1>
+		<br>
+		<h1>Admin first need to add flights by signing in such that flights are available to user.</h1>
+		<br>
+		<h1>User first needs to sign up before logging in and as many users can sign up.</h1>
+		<br>
+	</div>
 </body>
 </html>
